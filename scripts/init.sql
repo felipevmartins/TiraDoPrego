@@ -17,6 +17,6 @@ CREATE TABLE prestadores (
 
 CREATE ROLE docker LOGIN PASSWORD 'docker'
 
-ALTER TABLE "users" OWNER TO docker;
+ALTER TABLE "usuarios" OWNER TO docker;
 
-Insert into users(login,password) values( 'admin','AOfjLxMEZ9oVUB59+u4NVgx3t/WOTv1qa6zLdsic9QALuvKlE6tRoj/nZ3Q+7Ux0uA==');
+Insert into usuarios(login,password) values( 'admin','AOfjLxMEZ9oVUB59+u4NVgx3t/WOTv1qa6zLdsic9QALuvKlE6tRoj/nZ3Q+7Ux0uA==');
