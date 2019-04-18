@@ -26,7 +26,7 @@
                     :readonly="mode === 'remove'"
                     placeholder="Informe a Horario de funcionamento..." />
             </b-form-group>
-            <b-form-group label="Horario:" label-for="category-name">
+            <b-form-group label="Telefone:" label-for="category-name">
                 <b-form-input id="category-name" type="text"
                     v-model="prestador.telefone" required
                     :readonly="mode === 'remove'"
