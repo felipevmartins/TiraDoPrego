@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export const userKey = '__knowledge_user'
+export const usuarioKey = '__knowledge_user'
 export const baseApiUrl = 'http://localhost:5100'
 
 export function showError(e) {
@@ -13,4 +13,8 @@ export function showError(e) {
     }
 }
 
-export default { baseApiUrl, showError, userKey }
+export function showPasswordError(e) {
+    Vue.toasted.global.passwordError()
+}
+
+export default { baseApiUrl, showError, showPasswordError, usuarioKey }

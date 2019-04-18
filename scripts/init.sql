@@ -3,7 +3,8 @@
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY NOT NULL,
     login VARCHAR(100) NOT NULL,
-    password VARCHAR(250) NOT NULL
+    password VARCHAR(250) NOT NULL,
+	email VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE prestadores (
@@ -15,8 +16,4 @@ CREATE TABLE prestadores (
 	horario VARCHAR(100) NOT NULL
 );
 
-CREATE ROLE docker LOGIN PASSWORD 'docker'
-
-ALTER TABLE "usuarios" OWNER TO docker;
-
-Insert into usuarios(login,password) values( 'admin','AOfjLxMEZ9oVUB59+u4NVgx3t/WOTv1qa6zLdsic9QALuvKlE6tRoj/nZ3Q+7Ux0uA==');
+Insert into usuarios(login,password,email) values( 'admin','AOfjLxMEZ9oVUB59+u4NVgx3t/WOTv1qa6zLdsic9QALuvKlE6tRoj/nZ3Q+7Ux0uA==', 'admin@tiradoprego.com');

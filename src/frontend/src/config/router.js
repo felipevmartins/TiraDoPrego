@@ -5,7 +5,7 @@ import Home from '@/components/home/Home'
 import AdminPages from '@/components/admin/AdminPages'
 import Auth from '@/components/auth/Auth'
 
-import { userKey } from '@/global'
+import { usuarioKey } from '@/global'
 
 Vue.use(VueRouter)
 
@@ -29,7 +29,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const json = localStorage.getItem(userKey)
+    const json = localStorage.getItem(usuarioKey)
 
     if(to.matched.some(record => record.meta.requiresAdmin)) {
         const user = JSON.parse(json)

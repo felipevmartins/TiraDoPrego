@@ -1,15 +1,17 @@
 <template>
-	<div id="app">
+	<div id="app" >
 		<Header title="Tira do Prego" 
-			:hideUserDropdown="!user" />
-		<Content />
+			:hideToggle="!usuario"
+			:hideUserDropdown="!usuario" />
+		<Loading v-if="validatingToken" />
+		<Content v-else />
 		<Footer />
 	</div>
 </template>
 
 <script>
 import axios from "axios"
-import { baseApiUrl, userKey } from "@/global"
+import { baseApiUrl, usuarioKey } from "@/global"
 import { mapState } from "vuex"
 import Header from "@/components/template/Header"
 import Content from "@/components/template/Content"
@@ -19,7 +21,7 @@ import Loading from "@/components/template/Loading"
 export default {
 	name: "App",
 	components: { Header, Content, Footer, Loading },
-	computed: mapState(['isMenuVisible', 'user']),
+	computed: mapState(['isMenuVisible', 'usuario']),
 	data: function() {
 		return {
 			validatingToken: true
@@ -29,17 +31,17 @@ export default {
 		async validateToken() {
 			this.validatingToken = true
 
-			const json = localStorage.getItem(userKey)
+			const json = localStorage.getItem(usuarioKey)
 			const userData = JSON.parse(json)
 			this.$store.commit('setUsuario', null)
-
+			
 			if(!userData) {
 				this.validatingToken = false
 				this.$router.push({ name: 'auth' })
 				return
 			}
 
-			const res = await axios.post(`${baseApiUrl}/validateToken`, userData)
+			const res = await axios.put(`${baseApiUrl}/api/Auth`, userData)
 
 			if (res.data) {
 				this.$store.commit('setUsuario', userData)
@@ -48,15 +50,16 @@ export default {
 					this.$store.commit('toggleMenu', false)
 				}
 			} else {
-				localStorage.removeItem(userKey)
+				localStorage.removeItem(usuarioKey)
 				this.$router.push({ name: 'auth' })
 			}
 
 			this.validatingToken = false
+
 		}
 	},
 	created() {
-		
+		this.validateToken()
 	}
 }
 </script>
@@ -83,4 +86,6 @@ export default {
 			"content content"
 			"footer footer";
 	}
+
+	
 </style>

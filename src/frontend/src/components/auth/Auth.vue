@@ -4,8 +4,10 @@
             <div class="auth-title">{{ showSignup ? 'Cadastro' : 'Login' }}</div>
 
             <input v-model="usuario.login" name="login" type="text" placeholder="Login">
+            <input v-if="showSignup" v-model="usuario.email" name="email" type="email" placeholder="E-mail">
             <input v-model="usuario.password" name="password" type="password" placeholder="Senha">
-
+            <input v-if="showSignup" v-model="usuario.passwordConfirm"
+                type="password" placeholder="Confirme a Senha">
             <button v-if="showSignup" @click="signup">Registrar</button>
             <button v-else @click="signin">Entrar</button>
 
@@ -18,7 +20,7 @@
 </template>
 
 <script>
-import { baseApiUrl, showError, usuarioKey } from '@/global'
+import { baseApiUrl, showError, showPasswordError, usuarioKey } from '@/global'
 import axios from 'axios'
 
 export default {
@@ -32,21 +34,27 @@ export default {
     methods: {
         signin() {
             axios.post(`${baseApiUrl}/api/Auth`, this.usuario)
-                .then(res => {
-                    this.$store.commit('setUsuario', res.data)
-                    localStorage.setItem(usuarioKey, JSON.stringify(res.data))
-                    this.$router.push({ path: '/' })
-                })
-                .catch(showError)
+                    .then(res => {
+                        console.log(this.usuario)
+                        this.$store.commit('setUsuario', res.data)
+                        localStorage.setItem(usuarioKey, JSON.stringify(res.data))
+                        this.$router.push({ path: '/' })
+                    })
+                    .catch(showError)
         },
         signup() {
-            axios.post(`${baseApiUrl}/api/Usuario`, this.usuario)
-                .then(() => {
-                    this.$toasted.global.defaultSuccess()
-                    this.usuario = {}
-                    this.showSignup = false
-                })
-                .catch(showError)
+              console.log(this.usuario)
+            if(this.usuario.password == this.usuario.passwordConfirm){
+                axios.post(`${baseApiUrl}/api/Usuario`, this.usuario)
+                    .then(() => {
+                        this.$toasted.global.defaultSuccess()
+                        this.usuario = {}
+                        this.showSignup = false
+                    })
+                    .catch(showError)
+            }else{
+                showPasswordError()
+            }
         }
     }
 }

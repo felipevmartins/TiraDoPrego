@@ -90,5 +90,20 @@ namespace TiraDoPrego.Api.Controllers
                 };
             }
         }
+
+        [AllowAnonymous]
+        [HttpPut]
+        public bool Put([FromBody] dynamic usuario)
+        {
+            if(usuario != null)
+            {
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

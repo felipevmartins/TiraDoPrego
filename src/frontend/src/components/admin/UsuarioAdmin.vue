@@ -1,23 +1,32 @@
 <template>
     <div class="user-admin">
         <b-form>
-            <input id="user-id" type="hidden" v-model="usuario.id" />
+            <input id="user-id" type="hidden" v-model="usuarioEdit.id" />
             <b-row>
                 <b-col md="6" sm="12">
                     <b-form-group label="Nome:" label-for="user-name">
                         <b-form-input id="user-name" type="text"
-                            v-model="usuario.login" required
+                            v-model="usuarioEdit.login" required
                             :readonly="mode === 'remove'"
-                            placeholder="Informe o Nome do Usuário..." />
+                            placeholder="Informe o Login do Usuário..." />
                     </b-form-group>
                 </b-col>
             </b-row>
-           
+           <b-row>
+                <b-col md="6" sm="12">
+                    <b-form-group label="Email:" label-for="user-email">
+                        <b-form-input id="user-email" type="text"
+                            v-model="usuarioEdit.email" required
+                            :readonly="mode === 'remove'"
+                            placeholder="Informe o Email do Usuário..." />
+                    </b-form-group>
+                </b-col>
+            </b-row>
             <b-row v-show="mode === 'save'">
                 <b-col md="6" sm="12">
                     <b-form-group label="Senha:" label-for="user-password">
                         <b-form-input id="user-password" type="password"
-                            v-model="usuario.password" required
+                            v-model="usuarioEdit.password" required
                             placeholder="Informe a Senha do Usuário..." />
                     </b-form-group>
                 </b-col>
@@ -56,11 +65,12 @@ export default {
     data: function() {
         return {
             mode: 'save',
-            usuario: {},
+            usuarioEdit: {},
             usuarios: [],
             fields: [
                 { key: 'id', label: 'Código', sortable: true },
                 { key: 'login', label: 'Login', sortable: true },
+                { key: 'email', label: 'Email', sortable: true },
                 { key: 'actions', label: 'Ações' }
             ]
         }
@@ -74,13 +84,13 @@ export default {
         },
         reset() {
             this.mode = 'save'
-            this.usuario = {}
+            this.usuarioEdit = {}
             this.loadUsuarios()
         },
         save() {
-            const method = this.usuario.id ? 'put' : 'post'
-            const id = this.usuario.id ? `/${this.usuario.id}` : ''
-            axios[method](`${baseApiUrl}/api/Usuario${id}`, this.usuario)
+            const method = this.usuarioEdit.id ? 'put' : 'post'
+            const id = this.usuarioEdit.id ? `/${this.usuarioEdit.id}` : ''
+            axios[method](`${baseApiUrl}/api/Usuario${id}`, this.usuarioEdit)
                 .then(() => {
                     this.$toasted.global.defaultSuccess()
                     this.reset()
@@ -88,7 +98,7 @@ export default {
                 .catch(showError)
         },
         remove() {
-            const id = this.usuario.id
+            const id = this.usuarioEdit.id
             axios.delete(`${baseApiUrl}/api/Usuario/${id}`)
                 .then(() => {
                     this.$toasted.global.defaultSuccess()
@@ -96,13 +106,15 @@ export default {
                 })
                 .catch(showError)
         },
-        loadUsuario(usuario, mode = 'save') {
+        loadUsuario(usuarioEdit, mode = 'save') {
             this.mode = mode
-            this.usuario = { ...usuario }
+            this.usuarioEdit = { ...usuarioEdit }
         }
     },
     mounted() {
         this.loadUsuarios()
+        this.usuarioEdit = {}
+        console.log(this.usuarioEdit)
     }
 }
 </script>

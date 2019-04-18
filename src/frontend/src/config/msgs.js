@@ -17,3 +17,9 @@ Vue.toasted.register(
     payload => !payload.msg ? 'Oops.. Erro inesperado.' : payload.msg,
     { type : 'error', icon : 'times' }
 )
+
+Vue.toasted.register(
+    'passwordError',
+    payload => !payload.msg ? 'Passwords não conferem.' : payload.msg,
+    { type : 'error', icon : 'times' }
+)

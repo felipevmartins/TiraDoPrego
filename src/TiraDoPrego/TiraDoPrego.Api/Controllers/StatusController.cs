@@ -23,7 +23,6 @@ namespace TiraDoPrego.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize("Bearer")]
         public ActionResult<dynamic> Get()
         {
             var countPrestador = _prestadorContext.prestadores.Count();
