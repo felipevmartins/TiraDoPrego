@@ -11,8 +11,6 @@
                             placeholder="Informe o Login do Usuário..." />
                     </b-form-group>
                 </b-col>
-            </b-row>
-           <b-row>
                 <b-col md="6" sm="12">
                     <b-form-group label="Email:" label-for="user-email">
                         <b-form-input id="user-email" type="text"
@@ -22,11 +20,24 @@
                     </b-form-group>
                 </b-col>
             </b-row>
+           <b-row>
+            <b-form-checkbox id="user-admin" v-show="mode === 'save'"
+                v-model="usuarioEdit.admin" class="mt-3 mb-3">
+                Administrador?
+            </b-form-checkbox>    
+            </b-row>
             <b-row v-show="mode === 'save'">
                 <b-col md="6" sm="12">
                     <b-form-group label="Senha:" label-for="user-password">
                         <b-form-input id="user-password" type="password"
                             v-model="usuarioEdit.password" required
+                            placeholder="Informe a Senha do Usuário..." />
+                    </b-form-group>
+                </b-col>
+                <b-col md="6" sm="12">
+                    <b-form-group label="Confirmação Senha:" label-for="user-password">
+                        <b-form-input id="user-password" type="password"
+                            v-model="usuarioEdit.passwordConfirm" required
                             placeholder="Informe a Senha do Usuário..." />
                     </b-form-group>
                 </b-col>
@@ -71,6 +82,7 @@ export default {
                 { key: 'id', label: 'Código', sortable: true },
                 { key: 'login', label: 'Login', sortable: true },
                 { key: 'email', label: 'Email', sortable: true },
+                { key: 'admin', label: 'Admin', sortable: true },
                 { key: 'actions', label: 'Ações' }
             ]
         }
@@ -114,7 +126,6 @@ export default {
     mounted() {
         this.loadUsuarios()
         this.usuarioEdit = {}
-        console.log(this.usuarioEdit)
     }
 }
 </script>

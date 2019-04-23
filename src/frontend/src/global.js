@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 export const usuarioKey = '__knowledge_user'
-export const baseApiUrl = 'http://35.247.236.48:5100'
+export const baseApiUrl = 'http://localhost:5100'
 
 export function showError(e) {
     if(e && e.response && e.response.data) {

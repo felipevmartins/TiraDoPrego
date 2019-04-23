@@ -15,6 +15,8 @@ namespace TiraDoPrego.Api.Model
         public string password { get; set; }
         [Column("email")]
         public string email { get; set; }
+        [Column("admin")]
+        public bool admin { get; set; }
 
         [NotMapped]
         public string passwordConfirm { get; set; }

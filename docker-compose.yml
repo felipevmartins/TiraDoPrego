@@ -40,11 +40,3 @@ services:
       - db
     depends_on:
       - "sql.data"
-      
-  tiradoprego:
-    build: ./src/frontend
-    ports:
-      - "8080:8080"
-    command: sh -c "npm install && npm run serve"
-    volumes:
-      - ".:/app"

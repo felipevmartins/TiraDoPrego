@@ -35,6 +35,7 @@ namespace TiraDoPrego.Api.Controllers
         public void Put(int id, [FromBody] Usuario usuario)
         {
             var user = _userContext.usuarios.Single(p => p.id == id);
+            user.admin = usuario.admin;
             user.password = PasswordEncrypt.HashPassword(usuario.password);
 
             _userContext.SaveChanges();

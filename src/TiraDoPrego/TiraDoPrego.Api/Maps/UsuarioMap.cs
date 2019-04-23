@@ -19,6 +19,7 @@ namespace TiraDoPrego.Api.Maps
             entityBuilder.Property(x => x.login).HasColumnName("login");
             entityBuilder.Property(x => x.password).HasColumnName("password");
             entityBuilder.Property(x => x.email).HasColumnName("email");
+            entityBuilder.Property(x => x.admin).HasColumnName("admin");
         }
     }
 }

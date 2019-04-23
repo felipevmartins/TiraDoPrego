@@ -38,10 +38,12 @@ namespace TiraDoPrego.Api.Controllers
                 var usuarioBase = _usuarioContext.usuarios.Where(b => b.login == usuario.login).Select((c) => new
                 {
                     login = c.login,
-                    password = c.password
+                    password = c.password,
+                    admin = c.admin
                 }).FirstOrDefault();
 
                 credenciaisValidas = PasswordEncrypt.VerifyHashedPassword(usuarioBase.password, usuario.password);
+                usuario.admin = usuarioBase.admin;
             }
 
             if (credenciaisValidas)
@@ -78,7 +80,7 @@ namespace TiraDoPrego.Api.Controllers
                     accessToken = token,
                     message = "OK",
                     usuario = usuario.login,
-                    admin = true
+                    admin = usuario.admin
                 };
             }
             else

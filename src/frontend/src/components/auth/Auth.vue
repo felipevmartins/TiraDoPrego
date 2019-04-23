@@ -1,6 +1,7 @@
 <template>
     <div class="auth-content">
         <div class="auth-modal">
+			<img src="@/assets/logo.png" width="100" alt="Logo" />
             <div class="auth-title">{{ showSignup ? 'Cadastro' : 'Login' }}</div>
 
             <input v-model="usuario.login" name="login" type="text" placeholder="Login">
@@ -20,7 +21,7 @@
 </template>
 
 <script>
-import { baseApiUrl, showError, showPasswordError, usuarioKey } from '@/global'
+import { baseApiUrl, showError, usuarioKey } from '@/global'
 import axios from 'axios'
 
 export default {
@@ -33,9 +34,9 @@ export default {
     },
     methods: {
         signin() {
+            this.usuario.admin = false
             axios.post(`${baseApiUrl}/api/Auth`, this.usuario)
                     .then(res => {
-                        console.log(this.usuario)
                         this.$store.commit('setUsuario', res.data)
                         localStorage.setItem(usuarioKey, JSON.stringify(res.data))
                         this.$router.push({ path: '/' })
@@ -43,7 +44,6 @@ export default {
                     .catch(showError)
         },
         signup() {
-              console.log(this.usuario)
             if(this.usuario.password == this.usuario.passwordConfirm){
                 axios.post(`${baseApiUrl}/api/Usuario`, this.usuario)
                     .then(() => {
@@ -53,7 +53,7 @@ export default {
                     })
                     .catch(showError)
             }else{
-                showPasswordError()
+                showError('Senhas não conferem!')
             }
         }
     }
