@@ -42,7 +42,7 @@ namespace TiraDoPrego.Api.Controllers
                     admin = c.admin
                 }).FirstOrDefault();
 
-                credenciaisValidas = PasswordEncrypt.VerifyHashedPassword(usuarioBase.password, usuario.password);
+                credenciaisValidas = PasswordEncrypt.VerifyPassword(usuarioBase.password, usuario.password);
                 usuario.admin = usuarioBase.admin;
             }
 

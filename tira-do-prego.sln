@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FEA0C318-FFED-4D39-8781-265718CA43DD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiraDoPrego.Api", "src\TiraDoPrego\TiraDoPrego.Api\TiraDoPrego.Api.csproj", "{660466A6-5B58-49D2-A2B3-0F16C7745DCC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E8D3B3DF-6236-41F8-8C05-8672E6E4045E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiraDoPregoTest", "src\TiraDoPregoTest\TiraDoPregoTest.csproj", "{7BD1414E-DFB7-4B55-8112-0EBE3E5A1DF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +25,17 @@ Global
 		{660466A6-5B58-49D2-A2B3-0F16C7745DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{660466A6-5B58-49D2-A2B3-0F16C7745DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{660466A6-5B58-49D2-A2B3-0F16C7745DCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BD1414E-DFB7-4B55-8112-0EBE3E5A1DF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BD1414E-DFB7-4B55-8112-0EBE3E5A1DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BD1414E-DFB7-4B55-8112-0EBE3E5A1DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BD1414E-DFB7-4B55-8112-0EBE3E5A1DF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{660466A6-5B58-49D2-A2B3-0F16C7745DCC} = {E8D3B3DF-6236-41F8-8C05-8672E6E4045E}
+		{7BD1414E-DFB7-4B55-8112-0EBE3E5A1DF9} = {E8D3B3DF-6236-41F8-8C05-8672E6E4045E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0F7C316F-DEFA-4CBE-8028-69CBE11F97F1}

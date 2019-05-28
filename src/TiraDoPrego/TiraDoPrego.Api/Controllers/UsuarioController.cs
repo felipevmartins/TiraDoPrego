@@ -25,7 +25,7 @@ namespace TiraDoPrego.Api.Controllers
         [HttpPost]
         public void Post([FromBody] Usuario usuario)
         {
-            usuario.password = PasswordEncrypt.HashPassword(usuario.password);
+            usuario.password = PasswordEncrypt.EncryptString(usuario.password);
             _userContext.Add(usuario);
             _userContext.SaveChanges();
         }
@@ -36,7 +36,7 @@ namespace TiraDoPrego.Api.Controllers
         {
             var user = _userContext.usuarios.Single(p => p.id == id);
             user.admin = usuario.admin;
-            user.password = PasswordEncrypt.HashPassword(usuario.password);
+            user.password = PasswordEncrypt.EncryptString(usuario.password);
 
             _userContext.SaveChanges();
         }
