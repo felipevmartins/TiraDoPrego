@@ -1,14 +1,22 @@
-FROM node:10.15.0 as ui-builder
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
-COPY package.json /usr/src/app/package.json
+FROM node:9.11.1-alpine
+
+# instala um servidor http simples para servir conteúdo estático
+RUN npm install -g http-server
+
+# faz da pasta 'app' o diretório atual de trabalho
+WORKDIR /app
+
+# copia os arquivos 'package.json' e 'package-lock.json' (se disponível)
+COPY package.json ./
+
+# instala dependências do projeto
 RUN npm install
-RUN npm install -g @vue/cli
-COPY . /usr/src/app
+
+# copia arquivos e pastas para o diretório atual de trabalho (pasta 'app')
+COPY . .
+
+# compila a aplicação de produção com minificação
 RUN npm run build
- 
-FROM nginx
-COPY  --from=ui-builder /usr/src/app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+
+EXPOSE 8080
+CMD [ "http-server", "dist" ] 
